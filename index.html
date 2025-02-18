@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="add-to-cart-button">
+      <a
+        href="?add-to-cart=1255"
+        aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1255"
+        data-quantity="1"
+        class="primary is-small mb-0 button product_type_simple add_to_cart_button ajax_add_to_cart is-outline"
+        data-product_id="1255"
+        data-product_sku=""
+        aria-label="Add to cart: “Bột cà chua”"
+        rel="nofollow"
+        data-success_message="“Bột cà chua” has been added to your cart"
+        >Add to cart</a
+      >
+    </div>
+    <div class="add-to-cart-button">
+      <a
+        href="?add-to-cart=1256"
+        aria-describedby="woocommerce_loop_add_to_cart_link_describedby_1256"
+        data-quantity="1"
+        class="primary is-small mb-0 button product_type_simple add_to_cart_button ajax_add_to_cart is-outline"
+        data-product_id="1256"
+        data-product_sku=""
+        aria-label="Add to cart: “Bột cà rốt”"
+        rel="nofollow"
+        data-success_message="“Bột cà rốt” has been added to your cart"
+        >Add to cart</a
+      >
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const addToCartButtons = document.querySelectorAll(
+          '.add-to-cart-button a',
+        );
+        addToCartButtons.forEach(function (button) {
+          button.textContent = 'Mua ngay';
+        });
+      });
+    </script>
+  </body>
+</html>
