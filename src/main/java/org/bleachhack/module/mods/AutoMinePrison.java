@@ -31,8 +31,7 @@ public class AutoMinePrison extends Module {
       new Vec3d(729.594, 143.50000, -1084.665),
       new Vec3d(729.781, 143.50000, -1056.513),
       new Vec3d(701.287, 143.50000, -1056.465),
-      new Vec3d(701.697, 143.50000, -1084.202)
-  )
+      new Vec3d(701.697, 143.50000, -1084.202));
 
   private int currentTargetIndex = 0;
   private final double reachDistance = 0.2; // Khoảng cách chấp nhận khi đến đích
