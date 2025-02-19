@@ -17,6 +17,7 @@ public class AutoBoss extends Module {
 
   private static final Vec3d TARGET_POS = new Vec3d(1256.510, 83.0, 941.618);
   private static final Vec3d HOUSE_POS = new Vec3d(1280.824, 79.0, 927.360);
+  private static final Vec3d BLOCK_POS = new Vec3d(1240.700, 80, 941.515);
 
   public AutoBoss() {
     super("AutoBoss", KEY_UNBOUND, ModuleCategory.PLAYER, "Automatically move to position with jumping and NoClip");
@@ -34,16 +35,13 @@ public class AutoBoss extends Module {
       Vec3d playerPos = player.getPos();
       double distanceToTarget = playerPos.squaredDistanceTo(TARGET_POS);
       double distanceToHouse = playerPos.squaredDistanceTo(HOUSE_POS);
+      double distanceToBlock = playerPos.squaredDistanceTo(BLOCK_POS);
 
       if (targetPos != null) {
         moveToTarget(player, playerPos);
-      }
-
-      if (distanceToHouse < 20) {
+      } else if (distanceToHouse < 25 || distanceToBlock < 25) {
         handleHouseWarp();
-      }
-
-      if (distanceToTarget > 9 && distanceToHouse > 20 && isGoToDao1 == false) {
+      } else if (distanceToTarget > 9 && distanceToHouse > 20 && distanceToBlock > 20 && !isGoToDao1) {
         startMovingTo(TARGET_POS);
       }
     }
@@ -53,6 +51,8 @@ public class AutoBoss extends Module {
     double distance = playerPos.squaredDistanceTo(targetPos);
 
     if (distance > 2) { // Keep moving until close enough
+      player.noClip = true; // NoClip to move through blocks
+
       Vec3d direction = targetPos.subtract(playerPos).normalize();
       player.setYaw((float) Math.toDegrees(Math.atan2(-direction.x, direction.z))); // Adjust yaw to face target
       player.setVelocity(direction.x * MOVE_SPEED, player.getVelocity().y, direction.z * MOVE_SPEED); // Move towards target
@@ -64,6 +64,7 @@ public class AutoBoss extends Module {
     } else {
       targetPos = null; // Stop when close enough
       player.input.pressingForward = false;
+      player.noClip = false; // Disable NoClip
     }
   }
 
