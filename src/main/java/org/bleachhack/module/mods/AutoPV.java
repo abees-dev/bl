@@ -30,7 +30,7 @@ public class AutoPV extends Module {
     super("AutoPV", -1, ModuleCategory.PLAYER, "Automatically dumps your inventory into a chest",
         new SettingSlider("PV", 1, 50, 1, 0).withDesc("The setting max pv for player"),
         new SettingSlider("Default PV", 1, 50, 5, 0).withDesc("The setting default pv for player"),
-        new SettingSlider("Delay", 1, 60, 1, 0).withDesc("The setting delay for open inventory (munites)"));
+        new SettingSlider("Delay", 60, 600, 1, 0).withDesc("The setting delay for open inventory (munites)"));
   }
 
   private int step = 0;
@@ -51,7 +51,7 @@ public class AutoPV extends Module {
 
     int delaySetting = (int) getSetting(2).asSlider().getValue().doubleValue();
 
-    int delay = 60 * 20 * delaySetting; // default 1 phút
+    int delay = 20 * delaySetting; // default 1 giây
 
     if (delayTimer++ < delay) { // Delay 1 giây (20 ticks)
       return;
