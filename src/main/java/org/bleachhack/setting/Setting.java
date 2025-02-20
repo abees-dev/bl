@@ -6,65 +6,65 @@ import com.google.gson.JsonElement;
 
 public abstract class Setting<T> {
 
-	private String name;
-	private String tooltip;
+  private String name;
+  private String tooltip;
 
-	private T value;
-	protected final T defaultValue;
+  private T value;
+  protected final T defaultValue;
 
-	private SettingDataHandler<T> handler;
+  private SettingDataHandler<T> handler;
 
-	public Setting(String name, String tooltip, T value, SettingDataHandler<T> handler) {
-		this(name, tooltip, value, UnaryOperator.identity(), handler);
-	}
-	
-	public Setting(String name, String tooltip, T value, UnaryOperator<T> defaultValue, SettingDataHandler<T> handler) {
-		this.name = name;
-		this.tooltip = tooltip;
-		this.value = value;
-		this.defaultValue = defaultValue.apply(value);
-		this.handler = handler;
-	}
+  public Setting(String name, String tooltip, T value, SettingDataHandler<T> handler) {
+    this(name, tooltip, value, UnaryOperator.identity(), handler);
+  }
 
-	public SettingDataHandler<T> getHandler() {
-		return this.handler;
-	}
+  public Setting(String name, String tooltip, T value, UnaryOperator<T> defaultValue, SettingDataHandler<T> handler) {
+    this.name = name;
+    this.tooltip = tooltip;
+    this.value = value;
+    this.defaultValue = defaultValue.apply(value);
+    this.handler = handler;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public SettingDataHandler<T> getHandler() {
+    return this.handler;
+  }
 
-	public String getTooltip() {
-		return tooltip;
-	}
-	
-	public void setTooltip(String tooltip) {
-		this.tooltip = tooltip;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public T getValue() {
-		return value;
-	}
+  public String getTooltip() {
+    return tooltip;
+  }
 
-	public void setValue(T value) {
-		this.value = value;
-	}
+  public void setTooltip(String tooltip) {
+    this.tooltip = tooltip;
+  }
 
-	public void resetValue() {
-		setValue(defaultValue);
-	}
+  public T getValue() {
+    return value;
+  }
 
-	public boolean isDefault() {
-		return getValue().equals(defaultValue);
-	}
-	
-	public JsonElement write() {
-		return getHandler().write(getValue());
-	}
-	
-	public void read(JsonElement json) {
-		T val = getHandler().readOrNull(json);
-		if (val != null)
-			setValue(val);
-	}
+  public void setValue(T value) {
+    this.value = value;
+  }
+
+  public void resetValue() {
+    setValue(defaultValue);
+  }
+
+  public boolean isDefault() {
+    return getValue().equals(defaultValue);
+  }
+
+  public JsonElement write() {
+    return getHandler().write(getValue());
+  }
+
+  public void read(JsonElement json) {
+    T val = getHandler().readOrNull(json);
+    if (val != null)
+      setValue(val);
+  }
 }
